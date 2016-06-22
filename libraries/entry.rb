@@ -147,7 +147,7 @@ class Entry
         hosts = hosts[9..-1] || []
         results << [ip_address, hosts_set, comments].compact.join("\t").strip
       end
-      results.join("\r\n")
+      results.join("\n")
     else
       hosts = hosts.join(' ')
       comments = entry_comment(comment, priority)

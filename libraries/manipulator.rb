@@ -130,9 +130,10 @@ class Manipulator
   # Save the new hostsfile to the target machine. This method will only write the
   # hostsfile if the current version has changed. In other words, it is convergent.
   def save
-    file = Chef::Resource::File.new(hostsfile_path, node.run_context)
+    file = Chef::Resource::File.new("#{hostsfile_path}.chef_new", node.run_context)
     file.content(new_content)
     file.run_action(:create)
+    ::File.rename("#{hostsfile_path}.chef_new", hostsfile_path)
   end
 
   # Determine if the content of the hostfile has changed by comparing sha
